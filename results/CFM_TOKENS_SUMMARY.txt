@@ -1,0 +1,20 @@
+Copernicus-FM-Base on cuda | patch-embed module: DynamicPatchEmbed
+  ip       N=  9  coherence   0.97  (1 = unrelated, 9 = identical)  mean cosine -0.004
+  ip       N= 25  coherence   1.98  (1 = unrelated, 25 = identical)  mean cosine 0.041
+  ip       N= 63  coherence   5.12  (1 = unrelated, 63 = identical)  mean cosine 0.066
+  ip       N=100  coherence   8.05  (1 = unrelated, 100 = identical)  mean cosine 0.071
+  ip       N=200  coherence  16.28  (1 = unrelated, 200 = identical)  mean cosine 0.077
+ip       token norm: N=9 36.5 -> N=200 792.7 | log-log slope 25->all: input 1.01, output 0.87 | output all bands: none 765, BCR 256, GTN 63
+  salinas  N=  9  coherence   0.85  (1 = unrelated, 9 = identical)  mean cosine -0.019
+  salinas  N= 25  coherence   2.27  (1 = unrelated, 25 = identical)  mean cosine 0.053
+  salinas  N= 63  coherence   5.94  (1 = unrelated, 63 = identical)  mean cosine 0.080
+  salinas  N=100  coherence   9.24  (1 = unrelated, 100 = identical)  mean cosine 0.083
+  salinas  N=204  coherence  18.95  (1 = unrelated, 204 = identical)  mean cosine 0.088
+salinas  token norm: N=9 58.2 -> N=204 1395.3 | log-log slope 25->all: input 1.02, output 0.89 | output all bands: none 1316, BCR 422, GTN 52
+  pavia    N=  9  coherence   1.49  (1 = unrelated, 9 = identical)  mean cosine 0.061
+  pavia    N= 25  coherence   4.31  (1 = unrelated, 25 = identical)  mean cosine 0.138
+  pavia    N= 63  coherence  11.24  (1 = unrelated, 63 = identical)  mean cosine 0.165
+  pavia    N=100  coherence  18.08  (1 = unrelated, 100 = identical)  mean cosine 0.172
+  pavia    N=102  coherence  18.34  (1 = unrelated, 102 = identical)  mean cosine 0.172
+pavia    token norm: N=9 58.7 -> N=102 694.5 | log-log slope 25->all: input 1.01, output 0.83 | output all bands: none 667, BCR 427, GTN 65
+done: cfm_embed_norm.csv, cfm_coherence.csv

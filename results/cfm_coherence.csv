@@ -1,0 +1,16 @@
+model,dataset,n_bands,coherence,mean_cosine
+cfm_base,ip,9,0.9653,-0.0043
+cfm_base,ip,25,1.9771,0.0407
+cfm_base,ip,63,5.1227,0.0665
+cfm_base,ip,100,8.0547,0.0713
+cfm_base,ip,200,16.2785,0.0768
+cfm_base,salinas,9,0.8469,-0.0191
+cfm_base,salinas,25,2.2663,0.0528
+cfm_base,salinas,63,5.9413,0.0797
+cfm_base,salinas,100,9.2431,0.0833
+cfm_base,salinas,204,18.9461,0.0884
+cfm_base,pavia,9,1.4862,0.0608
+cfm_base,pavia,25,4.3102,0.1379
+cfm_base,pavia,63,11.2364,0.1651
+cfm_base,pavia,100,18.0755,0.1725
+cfm_base,pavia,102,18.3365,0.1716
