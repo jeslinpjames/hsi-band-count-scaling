@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+data/
+weights/
+third_party/DOFA/
+results/new/
+analysis/output/
+envs/
+*.log
+.pytest_cache/

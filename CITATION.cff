@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this code or these results, please cite the paper below."
+title: "More bands, larger tokens: code and per-run results"
+authors:
+  - family-names: James
+    given-names: Jeslin P
+  - family-names: S
+    given-names: Shailesh
+    email: shaileshsivan@gmail.com
+license: MIT
+version: 1.0.0
+preferred-citation:
+  type: article
+  title: "More bands, larger tokens: band-count scaling in wavelength-conditioned foundation models and its correction for few-label hyperspectral classification"
+  authors:
+    - family-names: James
+      given-names: Jeslin P
+    - family-names: S
+      given-names: Shailesh
+  journal: "ISPRS Journal of Photogrammetry and Remote Sensing"
+  year: 2026
+  notes: "submitted"
