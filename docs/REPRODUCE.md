@@ -36,8 +36,16 @@ can also be started directly, e.g.
 python scripts/train_dofa.py --dataset ip --method generic --correction gtn --seed 0 --csv results/new/test.csv
 ```
 
-Training is not bit-for-bit deterministic on GPUs (cuDNN), so re-runs agree with `results/` up to small run-to-run
-differences; the splits, however, are identical (they depend only on the seed). The original runs used
+Training is not bit-for-bit deterministic on GPUs (cuDNN), so a single run re-run with the same seed can differ from
+`results/` by one to two points of OA, and occasionally more; compare means over seeds, not single runs. The splits,
+however, are identical (they depend only on the seed). Example, Indian Pines, GTN, seed 0, re-run on the same GPU type:
+
+| Run | Paper (`results/`) | Original script, re-run | This repository |
+|---|---|---|---|
+| Copernicus-FM, Generic LoRA | 80.20 | 79.26 | 77.30 |
+| DOFA, Generic LoRA | 75.48 | – | 73.96 |
+
+All differences are well within the seed-to-seed spread (Copernicus-FM: 71.9–81.6 over seeds 0–7). The original runs used
 `OMP_NUM_THREADS=8`; the number of CPU threads also changes floating-point summation order, so keep it at 8 for the
 closest match.
 
@@ -105,6 +113,8 @@ Checks made when the repository was assembled:
   parameters after the first optimiser steps and random-number state, for the same arguments (synthetic scene, fixed
   weights, CPU), for GTN with Generic LoRA, BCR with Spectral LoRA, full fine-tuning, the VNIR subset and ungated
   normalisation of 25 bands;
+* on the GPU, `scripts/train_dofa.py` and `scripts/train_copernicus.py` give results within the run-to-run variation
+  of the original scripts (table above);
 * `scripts/classic_baselines.py` and `scripts/deep_baselines.py` give results identical to the original scripts;
 * `analysis/` reproduces all 3 174 numbers and all tables of the paper exactly from `results/`;
 * `scripts/experiments.py` lists exactly the runs contained in `results/` (no run missing, none extra).

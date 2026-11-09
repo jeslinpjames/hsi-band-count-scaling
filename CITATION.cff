@@ -4,10 +4,16 @@ title: "More bands, larger tokens: code and per-run results"
 authors:
   - family-names: James
     given-names: Jeslin P
+    email: jeslin@ug.cusat.ac.in
+    orcid: "https://orcid.org/0009-0007-9789-3114"
+    affiliation: "Department of Computer Science, Cochin University of Science and Technology, Kochi, India"
   - family-names: S
     given-names: Shailesh
-    email: shaileshsivan@gmail.com
+    email: shaileshsivan@cusat.ac.in
+    orcid: "https://orcid.org/0000-0002-5107-8997"
+    affiliation: "Department of Computer Science, Cochin University of Science and Technology, Kochi, India"
 license: MIT
+repository-code: "https://github.com/jeslinpjames/hsi-band-count-scaling"
 version: 1.0.0
 preferred-citation:
   type: article

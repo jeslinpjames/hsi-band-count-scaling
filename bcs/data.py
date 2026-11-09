@@ -43,13 +43,29 @@ def load_raw(scene):
     gt, _ = _read(os.path.join(DATA_DIR, fg), kg)
     if h5:                                          # HDF5 stores the cube band-first and transposed
         cube = cube.transpose(1, 2, 0)
+    if scene == "ip" and cube.shape[:2] == (145, 145):
+        cube, gt = _pad_ip(cube, gt)
     return cube.astype(np.float32), gt.astype(np.float32)
 
 
+# The Indian Pines copy used in the paper (distributed with HyperSIGMA) is the 145 x 145 scene surrounded by a
+# 2-pixel border of zeros (149 x 149). The border has no labels, but it enters the per-band standardisation and the
+# window coordinates. The EHU original (145 x 145) is padded in the same way, so both copies give identical inputs.
+IP_BORDER = 2
+
+
+def _pad_ip(cube, gt):
+    b = IP_BORDER
+    return (np.pad(cube, ((b, b), (b, b), (0, 0))), np.pad(gt, ((b, b), (b, b))))
+
+
 def load_gt(scene):
-    """Ground truth only (H, W) float32."""
+    """Ground truth only (H, W) float32 (Indian Pines padded to 149 x 149 as in load_raw)."""
     _, _, fg, kg = SCENES[scene]
-    return _read(os.path.join(DATA_DIR, fg), kg)[0].astype(np.float32)
+    gt = _read(os.path.join(DATA_DIR, fg), kg)[0]
+    if scene == "ip" and gt.shape == (145, 145):
+        gt = np.pad(gt, IP_BORDER)
+    return gt.astype(np.float32)
 
 
 def standardise(cube):

@@ -4,7 +4,10 @@ Code and per-run results for
 
 > **More bands, larger tokens: band-count scaling in wavelength-conditioned foundation models and its correction for
 > few-label hyperspectral classification.**
-> Jeslin P James, Shailesh S. Submitted to *ISPRS Journal of Photogrammetry and Remote Sensing*.
+> Jeslin P James, Shailesh S. Department of Computer Science, Cochin University of Science and Technology (CUSAT),
+> Kochi, India. Submitted to *ISPRS Journal of Photogrammetry and Remote Sensing*.
+>
+> Contact: Jeslin P James (jeslin@ug.cusat.ac.in), corresponding author.
 
 Wavelength-conditioned foundation models such as DOFA and Copernicus-FM generate one patch-embedding kernel per band
 from its wavelength and **sum** the per-band responses. Nothing divides by the number of bands N, and the band responses
@@ -38,6 +41,8 @@ tests/          unit tests of the corrections and splits (CPU, no data needed)
 ## Quick start
 
 ```bash
+git clone https://github.com/jeslinpjames/hsi-band-count-scaling.git && cd hsi-band-count-scaling
+
 # 1. environment (Python 3.8 for DOFA; see environment/README.md for Copernicus-FM)
 pip install torch==2.4.1 torchvision==0.19.1 --index-url https://download.pytorch.org/whl/cu118
 pip install -r environment/requirements-dofa.txt
