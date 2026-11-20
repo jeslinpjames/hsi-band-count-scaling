@@ -1,11 +1,11 @@
-# More bands, larger tokens
+# Correcting band-count scaling in wavelength-conditioned foundation models
 
 Code and per-run results for
 
-> **More bands, larger tokens: band-count scaling in wavelength-conditioned foundation models and its correction for
-> few-label hyperspectral classification.**
+> **Correcting band-count scaling in wavelength-conditioned foundation models for few-label hyperspectral
+> classification.**
 > Jeslin P James, Shailesh S. Department of Computer Science, Cochin University of Science and Technology (CUSAT),
-> Kochi, India. Submitted to *ISPRS Journal of Photogrammetry and Remote Sensing*.
+> Kochi, India. Submitted to *IEEE Transactions on Geoscience and Remote Sensing*.
 >
 > Contact: Jeslin P James (jeslin@ug.cusat.ac.in), corresponding author.
 
@@ -13,7 +13,8 @@ Wavelength-conditioned foundation models such as DOFA and Copernicus-FM generate
 from its wavelength and **sum** the per-band responses. Nothing divides by the number of bands N, and the band responses
 are weakly but consistently aligned, so the patch-token norm grows almost linearly with N: with the 200 bands of a
 hyperspectral scene, tokens are more than ten times larger than with the few bands of most pretraining sensors.
-Two corrections without trainable parameters remove this dependence and leave inputs with at most 63 bands unchanged:
+Two corrections without trainable parameters remove the dependence of the token magnitude on N and leave inputs with
+at most 63 bands unchanged:
 
 * **BCR**, band-count rescaling: multiply the input by `min(1, 63/N)`;
 * **GTN**, gated token normalisation: layer normalisation without learned parameters of every patch token when `N > 63`.
@@ -30,6 +31,7 @@ For Copernicus-FM, wrap the TorchGeo model: `bcs.copernicus.Corrected(model, "gt
 ```
 bcs/            library: corrections, splits, data loading, wavelengths, DOFA and Copernicus-FM set-up
 scripts/        training (DOFA, Copernicus-FM), baselines, token measurement, experiment launcher, data check
+paper1_extras/  classification maps and per-class accuracies (split 0): runs, launcher, progress check, figure/tables
 analysis/       every number, table and figure of the paper and supplement, from the per-run results
 results/        one CSV row per training run (about 2 000 runs); results/unreported: exploratory runs not in the paper
 docs/           DATA.md (datasets), REPRODUCE.md (paper item -> experiment -> file -> analysis output)
@@ -64,6 +66,20 @@ python scripts/run_experiments.py --exp main --gpus 0,1,2,3 --out results/new
 
 See `docs/REPRODUCE.md` for the experiment behind every table and figure, and the settings used.
 
+### Classification maps and per-class accuracies
+
+The maps and per-class tables of the paper come from one additional set of runs on split 0 (DOFA with Generic LoRA,
+without correction and with GTN, on the three scenes; SVM with the 33×33 mean spectrum and SSRN on the same split).
+Each run saves the prediction for every labelled pixel.
+
+```bash
+bash paper1_extras/run_all.sh          # 6 DOFA runs (at most 3 at a time) + baselines; restart-safe
+bash paper1_extras/progress.sh         # status of every run
+python paper1_extras/make_maps_tables.py --res results/paper1_extras --out paper1_extras/output
+```
+
+See `paper1_extras/README.md` for details.
+
 ## Protocols
 
 * **Random split:** 10 training and 5 validation pixels per class, all other labelled pixels are test pixels;
@@ -75,11 +91,11 @@ See `docs/REPRODUCE.md` for the experiment behind every table and figure, and th
 ## Citation
 
 ```bibtex
-@article{james2026morebands,
-  title   = {More bands, larger tokens: band-count scaling in wavelength-conditioned foundation models and its
-             correction for few-label hyperspectral classification},
+@article{james2026bandcount,
+  title   = {Correcting band-count scaling in wavelength-conditioned foundation models for few-label
+             hyperspectral classification},
   author  = {James, Jeslin P and S, Shailesh},
-  journal = {ISPRS Journal of Photogrammetry and Remote Sensing},
+  journal = {IEEE Transactions on Geoscience and Remote Sensing},
   note    = {submitted},
   year    = {2026}
 }

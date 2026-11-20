@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this code or these results, please cite the paper below."
-title: "More bands, larger tokens: code and per-run results"
+title: "Correcting band-count scaling in wavelength-conditioned foundation models: code and per-run results"
 authors:
   - family-names: James
     given-names: Jeslin P
@@ -14,15 +14,15 @@ authors:
     affiliation: "Department of Computer Science, Cochin University of Science and Technology, Kochi, India"
 license: MIT
 repository-code: "https://github.com/jeslinpjames/hsi-band-count-scaling"
-version: 1.0.0
+version: 1.1.0
 preferred-citation:
   type: article
-  title: "More bands, larger tokens: band-count scaling in wavelength-conditioned foundation models and its correction for few-label hyperspectral classification"
+  title: "Correcting band-count scaling in wavelength-conditioned foundation models for few-label hyperspectral classification"
   authors:
     - family-names: James
       given-names: Jeslin P
     - family-names: S
       given-names: Shailesh
-  journal: "ISPRS Journal of Photogrammetry and Remote Sensing"
+  journal: "IEEE Transactions on Geoscience and Remote Sensing"
   year: 2026
   notes: "submitted"
