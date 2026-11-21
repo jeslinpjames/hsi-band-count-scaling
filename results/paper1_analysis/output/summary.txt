@@ -1,0 +1,92 @@
+== Mechanism (pretrained DOFA, no training)
+ip       N=200 none token norm 142.9  feature norm 27.7  CKA(tokens, features) 0.949  relative update: mean 0.444, block 1 0.143, block 12 3.305
+ip       N=200 bcr  token norm 45.1  feature norm 27.7  CKA(tokens, features) 0.781  relative update: mean 0.468, block 1 0.371, block 12 1.735
+ip       N=200 gtn  token norm 27.7  feature norm 27.7  CKA(tokens, features) 0.902  relative update: mean 0.552, block 1 0.609, block 12 1.146
+salinas  N=204 none token norm 242.0  feature norm 27.7  CKA(tokens, features) 0.888  relative update: mean 0.298, block 1 0.082, block 12 2.366
+salinas  N=204 bcr  token norm 74.8  feature norm 27.7  CKA(tokens, features) 0.640  relative update: mean 0.474, block 1 0.241, block 12 2.696
+salinas  N=204 gtn  token norm 27.7  feature norm 27.7  CKA(tokens, features) 0.681  relative update: mean 0.513, block 1 0.576, block 12 0.716
+pavia    N=102 none token norm 71.0  feature norm 27.7  CKA(tokens, features) 0.517  relative update: mean 0.566, block 1 0.296, block 12 3.454
+pavia    N=102 bcr  token norm 43.9  feature norm 27.7  CKA(tokens, features) 0.500  relative update: mean 0.596, block 1 0.425, block 12 2.806
+pavia    N=102 gtn  token norm 27.7  feature norm 27.7  CKA(tokens, features) 0.852  relative update: mean 0.663, block 1 0.634, block 12 2.262
+longkou  N=270 none token norm 220.2  feature norm 27.7  CKA(tokens, features) 0.903  relative update: mean 0.326, block 1 0.116, block 12 2.618
+longkou  N=270 bcr  token norm 51.5  feature norm 27.7  CKA(tokens, features) 0.827  relative update: mean 0.529, block 1 0.392, block 12 2.630
+longkou  N=270 gtn  token norm 27.7  feature norm 27.7  CKA(tokens, features) 0.732  relative update: mean 0.627, block 1 0.640, block 12 1.971
+== Frozen-feature probes (OA %, mean +- std over splits; paired tests against no correction)
+ip       logreg none OA 68.0 +- 2.0
+ip       logreg bcr  OA 69.8 +- 2.9  diff +1.79  t-test p=0.00417  Wilcoxon p=0.00781
+ip       logreg gtn  OA 68.7 +- 3.8  diff +0.65  t-test p=0.519  Wilcoxon p=0.461
+salinas  logreg none OA 90.8 +- 3.0
+salinas  logreg bcr  OA 89.4 +- 1.8  diff -1.48  t-test p=0.244  Wilcoxon p=0.148
+salinas  logreg gtn  OA 86.1 +- 1.7  diff -4.70  t-test p=0.00174  Wilcoxon p=0.0156
+pavia    logreg none OA 78.3 +- 6.6
+pavia    logreg bcr  OA 79.0 +- 5.8  diff +0.78  t-test p=0.188  Wilcoxon p=0.25
+pavia    logreg gtn  OA 79.9 +- 5.3  diff +1.66  t-test p=0.0893  Wilcoxon p=0.148
+ip       knn    none OA 60.5 +- 2.6
+ip       knn    bcr  OA 65.3 +- 2.2  diff +4.87  t-test p=4.69e-06  Wilcoxon p=0.00781
+ip       knn    gtn  OA 62.2 +- 2.7  diff +1.78  t-test p=0.0237  Wilcoxon p=0.0391
+salinas  knn    none OA 83.8 +- 2.8
+salinas  knn    bcr  OA 83.7 +- 2.4  diff -0.06  t-test p=0.965  Wilcoxon p=0.383
+salinas  knn    gtn  OA 74.5 +- 3.7  diff -9.29  t-test p=0.000307  Wilcoxon p=0.00781
+pavia    knn    none OA 70.8 +- 7.3
+pavia    knn    bcr  OA 72.4 +- 7.0  diff +1.55  t-test p=0.109  Wilcoxon p=0.091
+pavia    knn    gtn  OA 71.4 +- 8.4  diff +0.58  t-test p=0.85  Wilcoxon p=0.499
+== Calibration / uncertainty / errors (fine-tuned Generic LoRA, test pixels; mean +- std over seeds)
+ip       none n=8  OA 0.676+-0.026  ECE 0.161+-0.056  NLL 1.536+-0.253  Brier 0.502+-0.038  AUROC 0.774+-0.043  AURC 0.152+-0.033  conf_err 0.732+-0.073  macroF1 0.623+-0.014  meanFPR 0.022+-0.002  cov90 0.546+-0.157  acc90 0.840+-0.049
+ip       bcr  n=8  OA 0.733+-0.034  ECE 0.135+-0.029  NLL 1.219+-0.207  Brier 0.411+-0.044  AUROC 0.815+-0.028  AURC 0.102+-0.021  conf_err 0.734+-0.060  macroF1 0.671+-0.030  meanFPR 0.018+-0.002  cov90 0.641+-0.109  acc90 0.881+-0.034
+ip       gtn  n=8  OA 0.728+-0.037  ECE 0.145+-0.038  NLL 1.180+-0.214  Brier 0.426+-0.059  AUROC 0.806+-0.045  AURC 0.109+-0.045  conf_err 0.751+-0.050  macroF1 0.695+-0.026  meanFPR 0.019+-0.002  cov90 0.648+-0.087  acc90 0.862+-0.048
+salinas  none n=8  OA 0.866+-0.034  ECE 0.038+-0.022  NLL 0.360+-0.080  Brier 0.188+-0.041  AUROC 0.877+-0.028  AURC 0.030+-0.010  conf_err 0.677+-0.057  macroF1 0.896+-0.030  meanFPR 0.009+-0.002  cov90 0.640+-0.105  acc90 0.978+-0.014
+salinas  bcr  n=8  OA 0.883+-0.011  ECE 0.048+-0.022  NLL 0.358+-0.108  Brier 0.177+-0.028  AUROC 0.875+-0.043  AURC 0.025+-0.011  conf_err 0.708+-0.081  macroF1 0.908+-0.014  meanFPR 0.008+-0.001  cov90 0.705+-0.124  acc90 0.968+-0.030
+salinas  gtn  n=8  OA 0.873+-0.027  ECE 0.053+-0.027  NLL 0.412+-0.103  Brier 0.197+-0.037  AUROC 0.865+-0.031  AURC 0.030+-0.013  conf_err 0.730+-0.079  macroF1 0.903+-0.022  meanFPR 0.009+-0.002  cov90 0.723+-0.112  acc90 0.953+-0.023
+pavia    none n=8  OA 0.817+-0.049  ECE 0.067+-0.042  NLL 0.575+-0.170  Brier 0.274+-0.069  AUROC 0.829+-0.042  AURC 0.059+-0.030  conf_err 0.737+-0.081  macroF1 0.785+-0.051  meanFPR 0.030+-0.007  cov90 0.663+-0.143  acc90 0.930+-0.039
+pavia    bcr  n=8  OA 0.856+-0.059  ECE 0.074+-0.050  NLL 0.477+-0.220  Brier 0.228+-0.093  AUROC 0.840+-0.047  AURC 0.043+-0.032  conf_err 0.709+-0.101  macroF1 0.821+-0.051  meanFPR 0.024+-0.009  cov90 0.648+-0.188  acc90 0.950+-0.049
+pavia    gtn  n=8  OA 0.906+-0.060  ECE 0.039+-0.033  NLL 0.312+-0.204  Brier 0.145+-0.092  AUROC 0.897+-0.047  AURC 0.021+-0.025  conf_err 0.719+-0.057  macroF1 0.891+-0.047  meanFPR 0.016+-0.010  cov90 0.779+-0.076  acc90 0.970+-0.038
+longkou  none n=16  OA 0.888+-0.029  ECE 0.044+-0.026  NLL 0.376+-0.132  Brier 0.174+-0.047  AUROC 0.871+-0.041  AURC 0.027+-0.016  conf_err 0.749+-0.066  macroF1 0.794+-0.042  meanFPR 0.013+-0.003  cov90 0.764+-0.119  acc90 0.959+-0.023
+longkou  bcr  n=16  OA 0.915+-0.023  ECE 0.034+-0.023  NLL 0.289+-0.112  Brier 0.132+-0.040  AUROC 0.910+-0.033  AURC 0.013+-0.007  conf_err 0.739+-0.074  macroF1 0.832+-0.031  meanFPR 0.010+-0.003  cov90 0.816+-0.078  acc90 0.970+-0.022
+longkou  gtn  n=16  OA 0.914+-0.035  ECE 0.031+-0.020  NLL 0.279+-0.132  Brier 0.130+-0.053  AUROC 0.921+-0.026  AURC 0.012+-0.008  conf_err 0.728+-0.061  macroF1 0.839+-0.052  meanFPR 0.010+-0.004  cov90 0.811+-0.086  acc90 0.975+-0.018
+== Reduced precision (agreement with fp32 predictions, OA change in points, speed-up)
+ip       none agree_fp16 0.9807  dOA_fp16 -0.0018  speed_fp16 1.3003  agree_bf16 0.9370  dOA_bf16 0.0013  speed_bf16 1.2233  agree_int8 0.9808  dOA_int8 0.0000  speed_int8 1.1311
+ip       gtn  agree_fp16 0.9761  dOA_fp16 -0.0015  speed_fp16 1.4541  agree_bf16 0.9215  dOA_bf16 -0.0131  speed_bf16 1.4020  agree_int8 0.9722  dOA_int8 -0.0030  speed_int8 1.2206
+salinas  none agree_fp16 0.9785  dOA_fp16 0.0037  speed_fp16 1.4934  agree_bf16 0.9828  dOA_bf16 -0.0018  speed_bf16 1.5380  agree_int8 0.9948  dOA_int8 0.0002  speed_int8 1.1915
+salinas  gtn  agree_fp16 0.9746  dOA_fp16 0.0025  speed_fp16 1.4387  agree_bf16 0.9713  dOA_bf16 -0.0055  speed_bf16 1.4537  agree_int8 0.9844  dOA_int8 -0.0022  speed_int8 1.1829
+pavia    none agree_fp16 0.9932  dOA_fp16 0.0000  speed_fp16 1.6204  agree_bf16 0.9744  dOA_bf16 -0.0079  speed_bf16 1.6014  agree_int8 0.9848  dOA_int8 -0.0066  speed_int8 1.3284
+pavia    gtn  agree_fp16 0.9942  dOA_fp16 0.0014  speed_fp16 1.7458  agree_bf16 0.9822  dOA_bf16 -0.0095  speed_bf16 1.7954  agree_int8 0.9898  dOA_int8 -0.0048  speed_int8 1.2647
+longkou  none agree_fp16 0.9954  dOA_fp16 0.0031  speed_fp16 1.1087  agree_bf16 0.9889  dOA_bf16 -0.0011  speed_bf16 0.9386  agree_int8 0.9957  dOA_int8 -0.0003  speed_int8 1.2703
+longkou  gtn  agree_fp16 0.9971  dOA_fp16 0.0006  speed_fp16 1.2912  agree_bf16 0.9919  dOA_bf16 -0.0003  speed_bf16 1.2678  agree_int8 0.9897  dOA_int8 -0.0057  speed_int8 1.2415
+== Gradient norms (mean over the first 50 epochs; first / last LoRA block)
+ip       none grad first 0.3215  last 0.485  ratio first/last 0.663
+ip       bcr  grad first 0.2616  last 0.4411  ratio first/last 0.593
+ip       gtn  grad first 0.3179  last 0.4328  ratio first/last 0.734
+salinas  none grad first 0.06526  last 0.1587  ratio first/last 0.411
+salinas  bcr  grad first 0.05428  last 0.1351  ratio first/last 0.402
+salinas  gtn  grad first 0.1552  last 0.185  ratio first/last 0.839
+pavia    none grad first 0.1082  last 0.25  ratio first/last 0.433
+pavia    bcr  grad first 0.09444  last 0.1837  ratio first/last 0.514
+pavia    gtn  grad first 0.1281  last 0.165  ratio first/last 0.777
+longkou  none grad first 0.0575  last 0.1111  ratio first/last 0.518
+longkou  bcr  grad first 0.07371  last 0.1264  ratio first/last 0.583
+longkou  gtn  grad first 0.1436  last 0.1507  ratio first/last 0.953
+== Inference throughput
+scene       method correction  batch  pixels_per_s  ms_per_pixel
+   ip dofa_generic       none     64         359.2        2.7838
+   ip dofa_generic        bcr     64         356.3        2.8066
+   ip dofa_generic        gtn     64         359.7        2.7803
+   ip         ssrn          -    512       39550.2        0.0253
+   ip     svm_sp33          -   5000       26040.2        0.0384
+pavia dofa_generic       none     64         410.8        2.4340
+pavia dofa_generic        bcr     64         408.0        2.4509
+pavia dofa_generic        gtn     64         411.7        2.4289
+pavia         ssrn          -    512       75852.3        0.0132
+pavia     svm_sp33          -   5000       71682.0        0.0140
+== Split 0, test pixels: macro precision / recall / F1, mean per-class false-positive rate (%)
+ip       SVM + 33x33 mean   P 68.4  R 78.5  F1 68.0  FPR 2.11
+ip       SSRN               P 80.2  R 90.5  F1 83.9  FPR 1.25
+ip       DOFA, no corr.     P 61.9  R 85.2  F1 67.1  FPR 1.77
+ip       DOFA + GTN         P 65.5  R 86.9  F1 69.4  FPR 1.70
+salinas  SVM + 33x33 mean   P 90.3  R 91.5  F1 90.8  FPR 1.12
+salinas  SSRN               P 92.6  R 94.5  F1 93.3  FPR 0.81
+salinas  DOFA, no corr.     P 89.2  R 90.1  F1 89.0  FPR 1.06
+salinas  DOFA + GTN         P 89.9  R 91.5  F1 89.6  FPR 0.92
+pavia    SVM + 33x33 mean   P 78.7  R 86.4  F1 79.7  FPR 4.28
+pavia    SSRN               P 84.4  R 93.2  F1 87.5  FPR 2.36
+pavia    DOFA, no corr.     P 77.7  R 87.6  F1 80.8  FPR 2.95
+pavia    DOFA + GTN         P 85.3  R 89.7  F1 87.3  FPR 2.00

@@ -1,0 +1,11 @@
+scene,method,correction,batch,pixels_per_s,ms_per_pixel
+ip,dofa_generic,none,64,359.2,2.7838
+ip,dofa_generic,bcr,64,356.3,2.8066
+ip,dofa_generic,gtn,64,359.7,2.7803
+ip,ssrn,-,512,39550.2,0.0253
+ip,svm_sp33,-,5000,26040.2,0.0384
+pavia,dofa_generic,none,64,410.8,2.4340
+pavia,dofa_generic,bcr,64,408.0,2.4509
+pavia,dofa_generic,gtn,64,411.7,2.4289
+pavia,ssrn,-,512,75852.3,0.0132
+pavia,svm_sp33,-,5000,71682.0,0.0140

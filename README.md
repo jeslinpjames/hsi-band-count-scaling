@@ -32,6 +32,7 @@ For Copernicus-FM, wrap the TorchGeo model: `bcs.copernicus.Corrected(model, "gt
 bcs/            library: corrections, splits, data loading, wavelengths, DOFA and Copernicus-FM set-up
 scripts/        training (DOFA, Copernicus-FM), baselines, token measurement, experiment launcher, data check
 paper1_extras/  classification maps and per-class accuracies (split 0): runs, launcher, progress check, figure/tables
+paper1_analysis/ WHU-Hi-LongKou, analysis inside the network, frozen probes, reliability, precision and throughput
 analysis/       every number, table and figure of the paper and supplement, from the per-run results
 results/        one CSV row per training run (about 2 000 runs); results/unreported: exploratory runs not in the paper
 docs/           DATA.md (datasets), REPRODUCE.md (paper item -> experiment -> file -> analysis output)
@@ -79,6 +80,19 @@ python paper1_extras/make_maps_tables.py --res results/paper1_extras --out paper
 ```
 
 See `paper1_extras/README.md` for details.
+
+The fourth scene (WHU-Hi-LongKou) and the analyses of the revised paper (block updates and gradients inside DOFA,
+frozen-feature probes, calibration and false positives, fp16/bf16/int8 inference, throughput) come from
+`paper1_analysis/`:
+
+```bash
+python paper1_analysis/add_longkou.py                        # registers the LongKou scene and checks the data
+bash paper1_analysis/run_all.sh                               # first batch (34 jobs)
+JOBSET=more MAX_PAR=12 bash paper1_analysis/run_all.sh        # LongKou + seeds 3-7 (97 jobs)
+python paper1_analysis/analyze.py --res results/paper1_analysis --extras results/paper1_extras --out results/paper1_analysis/output
+```
+
+See `paper1_analysis/README.md` for details.
 
 ## Protocols
 
